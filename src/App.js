@@ -28,8 +28,7 @@ class CharacterIcon extends React.Component {
 	constructor(props) {
 		super(props)
 		this.character = props.character
-		this.icon = "/images/" + this.character + ".png"
-
+		this.icon = process.env.PUBLIC_URL + `/images/${this.character}.png`
 		this.state = {
 			completed: false,
 		}
@@ -128,7 +127,7 @@ class CharacterSelect extends React.Component {
 			characterElements: { 1: [], 2: [], 3: [] },
 			shareString: "",
 			generated: false,
-			input: null
+			input: null,
 		}
 
 		this.handleCharacterChange = this.handleCharacterChange.bind(this)
@@ -190,12 +189,14 @@ class CharacterSelect extends React.Component {
 	}
 
 	handleChange(e) {
-		this.setState({input: e.target.value})
+		this.setState({ input: e.target.value })
 	}
 
 	handleClick(e) {
 		this.handleCharacterChange(
-			this.state.input ? hashids.decode(this.state.input) : this.shuffleCharacters(this.state.characterOrder)
+			this.state.input
+				? hashids.decode(this.state.input).reverse()
+				: this.shuffleCharacters(this.state.characterOrder)
 		)
 	}
 
@@ -226,10 +227,7 @@ class CharacterSelect extends React.Component {
 						<InputGroup.Prepend>
 							<InputGroup.Text>Shared code</InputGroup.Text>
 						</InputGroup.Prepend>
-						<FormControl
-							type="text"
-							onChange={this.handleChange}
-						/>
+						<FormControl type="text" onChange={this.handleChange} />
 						<InputGroup.Append>
 							<Button
 								onClick={this.handleClick}
@@ -254,30 +252,6 @@ class CharacterSelect extends React.Component {
 					</Row>
 				</Grid>
 			</Container>
-		)
-	}
-}
-
-class CharacterInput extends React.Component {
-	constructor(props) {
-		super(props)
-
-		this.handleChange = this.handleChange.bind(this)
-	}
-
-	handleChange(e) {
-		this.props.onClickProps()
-	}
-
-	render() {
-		return (
-			<Button
-				onClick={this.handleChange}
-				variant="outline-secondary"
-				size="sm"
-			>
-				Generate
-			</Button>
 		)
 	}
 }
