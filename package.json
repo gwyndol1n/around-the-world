@@ -8,6 +8,7 @@
     "@testing-library/user-event": "^12.1.10",
     "bootstrap": "^4.5.3",
     "crypto-js": "^4.0.0",
+    "hashids": "^2.2.2",
     "md5": "^2.3.0",
     "react": "^17.0.1",
     "react-bootstrap": "^1.4.0",

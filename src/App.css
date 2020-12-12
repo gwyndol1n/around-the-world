@@ -36,3 +36,15 @@
     transform: rotate(360deg);
   }
 }
+
+.character-input {
+  padding: 4px 4px 4px 4px !important;
+}
+
+.character-input::selection {
+  color: black;
+}
+
+.character-input:focus {
+  outline: none;
+}
