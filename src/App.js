@@ -7,7 +7,6 @@ import {
 	Button,
 	Container,
 	FormControl,
-	FormLabel,
 	InputGroup,
 	OverlayTrigger,
 	Tooltip,
@@ -62,8 +61,9 @@ class CharacterShare extends React.Component {
 	}
 
 	copyToClipboard(e) {
-		e.target.select()
-		document.execCommand("copy")
+		navigator.clipboard.writeText(this.props.value).then(function () {
+			alert("Copied!")
+		})
 	}
 
 	render() {
@@ -82,9 +82,8 @@ class CharacterShare extends React.Component {
 						style={{ fontFamily: "Consolas" }}
 						plaintext
 						readOnly
-						defaultValue={this.props.value}
+						defaultValue="Share Code"
 						onClick={this.copyToClipboard}
-						placeholder="Share"
 					/>
 				</OverlayTrigger>
 			</InputGroup>
@@ -221,11 +220,11 @@ class CharacterSelect extends React.Component {
 
 	render() {
 		return (
-			<Container fluid="sm" className="text-center">
+			<Container fluid="lg" className="pt-4 text-center">
 				<Row>
 					<InputGroup className="col-md-6 col-md-offset-3">
 						<InputGroup.Prepend>
-							<InputGroup.Text>Shared code</InputGroup.Text>
+							<InputGroup.Text>Code</InputGroup.Text>
 						</InputGroup.Prepend>
 						<FormControl type="text" onChange={this.handleChange} />
 						<InputGroup.Append>
